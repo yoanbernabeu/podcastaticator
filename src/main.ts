@@ -57,7 +57,7 @@ Alpine.data('podcast', () => ({
   async init() {
     try {
       // Charger la configuration
-      const response = await fetch('/src/config.json');
+      const response = await fetch('/config.json');
       if (!response.ok) throw new Error('Erreur de chargement du fichier config.json');
       this.config = await response.json();
 
