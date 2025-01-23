@@ -1,0 +1,15 @@
+{
+  "rssFeed": "https://anchor.fm/s/fa77ecc8/podcast/rss",
+  "socialLinks": {
+    "twitter": "https://twitter.com/podcast",
+    "facebook": "https://facebook.com/podcast"
+  },
+  "listenOn": {
+    "spotify": "https://spotify.com/podcast",
+    "apple": "https://podcasts.apple.com/podcast",
+    "google": "https://podcasts.google.com/podcast",
+    "amazon": "https://music.amazon.com/podcast",
+    "deezer": "https://deezer.com/podcast",
+    "youtube": "https://youtube.com/podcast"
+  }
+}
