@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Déclenche le workflow lorsqu'un commit est poussé sur la branche principale
+  push:
+    branches:
+      - main
+
+  # Permet de déclencher manuellement le workflow via l'interface GitHub
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Checkout du dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Assurez-vous d'utiliser une version compatible avec Vite
+          cache: "npm"
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Construire le projet
+      - name: Build project
+        run: npm run build
+
+      # Étape 5 : Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Le dossier de sortie généré par Vite
