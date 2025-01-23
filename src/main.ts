@@ -36,6 +36,7 @@ type Episode = {
   description: string;
   audio: string;
   pubDate: string;
+  image?: string; // Ajout du champ image optionnel
 };
 
 Alpine.data('podcast', () => ({
@@ -84,6 +85,8 @@ Alpine.data('podcast', () => ({
         description: item.querySelector('description')?.textContent || 'Pas de description',
         audio: item.querySelector('enclosure')?.getAttribute('url') || '',
         pubDate: item.querySelector('pubDate')?.textContent || '',
+        image: item.querySelector('itunes\\:image')?.getAttribute('href') || 
+               item.querySelector('image')?.textContent || ''
       }));
     } catch (error) {
       console.error('Erreur lors de l’initialisation :', error);

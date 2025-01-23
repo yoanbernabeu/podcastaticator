@@ -1,16 +1,10 @@
 
 {
   "rssFeed": "https://anchor.fm/s/fa77ecc8/podcast/rss",
-  "socialLinks": {
-    "twitter": "https://twitter.com/podcast",
-    "facebook": "https://facebook.com/podcast"
-  },
   "listenOn": {
-    "spotify": "https://spotify.com/podcast",
-    "apple": "https://podcasts.apple.com/podcast",
-    "google": "https://podcasts.google.com/podcast",
-    "amazon": "https://music.amazon.com/podcast",
-    "deezer": "https://deezer.com/podcast",
-    "youtube": "https://youtube.com/podcast"
+    "spotify": "https://open.spotify.com/show/2bGWkpLS6KzkkLPnsyC02q",
+    "apple": "https://podcasts.apple.com/us/podcast/dystopia-les-fictions-qui-repoussent-les-limites-de-lia/id1792212874",
+    "amazon": "https://music.amazon.fr/podcasts/856eec40-02fc-41d2-ba8d-7627c26257d8/dystopia-les-fictions-qui-repoussent-les-limites-de-lia",
+    "deezer": "https://www.deezer.com/fr/show/1001574921"
   }
 }
