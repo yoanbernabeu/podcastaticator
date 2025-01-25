@@ -10,3 +10,16 @@
   @apply absolute inset-0;
   backdrop-filter: blur(4px);
 }
+
+/* Styles pour le player audio */
+audio {
+  @apply h-10;
+}
+
+audio::-webkit-media-controls-panel {
+  @apply bg-base-200;
+}
+
+audio::-webkit-media-controls-play-button {
+  @apply text-primary;
+}

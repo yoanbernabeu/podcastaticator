@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Détail de l'épisode</title>
+    <script type="module" src="/src/episode.ts"></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body x-data="episodeDetail" x-init="init()">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-4" x-text="episode?.title"></h1>
+      <div class="prose prose-invert max-w-none mb-6" x-html="episode?.description"></div>
+      <p class="italic opacity-70" x-text="episode?.pubDate"></p>
+      <div class="mt-6">
+        <img :src="episode?.image" alt="" class="max-w-xs rounded-lg" />
+      </div>
+      <div class="mt-6">
+        <a href="/" class="btn">Retour</a>
+      </div>
+    </div>
+  </body>
+</html>
