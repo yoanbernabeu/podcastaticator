@@ -23,3 +23,16 @@ audio::-webkit-media-controls-panel {
 audio::-webkit-media-controls-play-button {
   @apply text-primary;
 }
+
+/* Toast notification */
+.toast-notification {
+  @apply fixed bottom-20 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-primary text-primary-content;
+  @apply transform transition-all duration-300;
+  @apply opacity-0 translate-y-full;
+  @apply shadow-lg;
+  z-index: 70; /* Ajout de cette ligne pour être au-dessus de la modal (z-60) */
+}
+
+.toast-notification.show {
+  @apply opacity-100 translate-y-0;
+}

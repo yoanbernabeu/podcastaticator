@@ -39,6 +39,17 @@ type Episode = {
   image?: string;
 };
 
+function slugify(text: string): string {
+  return text
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/\s+/g, '-');
+}
+
 Alpine.data('podcast', () => ({
   config: {} as Config,
   podcastInfo: {} as PodcastInfo,
@@ -47,6 +58,7 @@ Alpine.data('podcast', () => ({
   isPlayerVisible: false,
   detailEpisode: null as Episode | null,
   isDetailVisible: false,
+  showToast: false,
 
   showEpisode(episode: Episode, action: 'play' | 'view' = 'play') {
     if (action === 'play') {
@@ -61,6 +73,9 @@ Alpine.data('podcast', () => ({
         if (audio) audio.play();
       }, 100);
     } else if (action === 'view') {
+      const slug = slugify(episode.title);
+      // Mettre à jour l'URL sans recharger la page
+      window.history.pushState({}, '', `/?episode=${slug}`);
       this.detailEpisode = episode;
       this.isDetailVisible = true;
     }
@@ -75,6 +90,21 @@ Alpine.data('podcast', () => ({
     // Ne plus stopper la lecture ici
     this.isPlayerVisible = false;
     this.currentEpisode = null;
+  },
+
+  async copyEpisodeLink(episode: Episode) {
+    const slug = slugify(episode.title);
+    const url = `${window.location.origin}/?episode=${slug}`;
+    
+    try {
+      await navigator.clipboard.writeText(url);
+      this.showToast = true;
+      setTimeout(() => {
+        this.showToast = false;
+      }, 2000);
+    } catch (err) {
+      console.error('Erreur lors de la copie:', err);
+    }
   },
 
   async init() {
@@ -169,6 +199,20 @@ Alpine.data('podcast', () => ({
           image: imageUrl
         };
       });
+
+      // Après avoir chargé les épisodes, vérifier si on doit afficher un épisode spécifique
+      const params = new URLSearchParams(window.location.search);
+      const episodeSlug = params.get('episode');
+      
+      if (episodeSlug) {
+        const episodeToShow = this.episodes.find(
+          ep => slugify(ep.title) === episodeSlug
+        );
+        if (episodeToShow) {
+          this.detailEpisode = episodeToShow;
+          this.isDetailVisible = true;
+        }
+      }
 
     } catch (error) {
       console.error('Erreur lors de l’initialisation :', error);
