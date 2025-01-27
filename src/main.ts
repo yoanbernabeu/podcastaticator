@@ -59,6 +59,7 @@ Alpine.data('podcast', () => ({
   detailEpisode: null as Episode | null,
   isDetailVisible: false,
   showToast: false,
+  isPlaying: false, // Nouvel état
 
   showEpisode(episode: Episode, action: 'play' | 'view' = 'play') {
     if (action === 'play') {
@@ -70,7 +71,13 @@ Alpine.data('podcast', () => ({
       this.isPlayerVisible = true;
       setTimeout(() => {
         const audio = document.querySelector('audio');
-        if (audio) audio.play();
+        if (audio) {
+          // Ajout des écouteurs d'événements
+          audio.addEventListener('play', () => this.isPlaying = true);
+          audio.addEventListener('pause', () => this.isPlaying = false);
+          audio.addEventListener('ended', () => this.isPlaying = false);
+          audio.play();
+        }
       }, 100);
     } else if (action === 'view') {
       const slug = slugify(episode.title);

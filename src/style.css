@@ -13,11 +13,11 @@
 
 /* Styles pour le player audio */
 audio {
-  @apply h-10;
+  @apply h-8;
 }
 
 audio::-webkit-media-controls-panel {
-  @apply bg-base-200;
+  @apply bg-base-200 py-0;
 }
 
 audio::-webkit-media-controls-play-button {
@@ -35,4 +35,22 @@ audio::-webkit-media-controls-play-button {
 
 .toast-notification.show {
   @apply opacity-100 translate-y-0;
+}
+
+/* Scrollbar stylisée */
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-2;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-base-200 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full hover:bg-primary transition-colors duration-200;
+}
+
+/* Style glass amélioré */
+.glass {
+  @apply backdrop-blur-md bg-white/10 border-white/20 shadow-lg;
 }
