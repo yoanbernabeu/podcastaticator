@@ -114,6 +114,19 @@ Alpine.data('podcast', () => ({
     }
   },
 
+  async updateMetaTags(title: string, description: string, image?: string) {
+    // Mettre à jour les meta tags
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:image"]')?.setAttribute('content', image || 'https://dystopia.yoandev.co/og.png');
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image || 'https://dystopia.yoandev.co/og.png');
+    document.querySelector('meta[name="author"]')?.setAttribute('content', title);
+  },
+
   async init() {
     try {
       // Charger la configuration
@@ -142,17 +155,7 @@ Alpine.data('podcast', () => ({
       };
 
       // Mettre à jour les balises meta manuellement
-      document.title = this.podcastInfo.title;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', this.podcastInfo.description);
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', this.podcastInfo.title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', this.podcastInfo.description);
-      document.querySelector('meta[property="og:image"]')?.setAttribute('content', this.podcastInfo.image);
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', this.podcastInfo.title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', this.podcastInfo.description);
-      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', this.podcastInfo.image);
-      document.querySelector('meta[name="author"]')?.setAttribute('content', this.podcastInfo.title);
-      document.querySelector('link[rel="icon"]')?.setAttribute('href', this.podcastInfo.image);
-      document.querySelector('link[rel="apple-touch-icon"]')?.setAttribute('href', this.podcastInfo.image);
+      this.updateMetaTags(this.podcastInfo.title, this.podcastInfo.description, this.podcastInfo.image);
 
       // Extraire les épisodes avec logging détaillé
       const items = channel.querySelectorAll('item');
